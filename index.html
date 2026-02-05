@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Can I Afford to Survive? - L.A. Edition</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__content">
+        <p class="hero__eyebrow">Software Requirements Specification (SRS)</p>
+        <h1>Can I Afford to Survive? – L.A. Edition</h1>
+        <p class="hero__subtitle">
+          A cancer policy navigation simulator built for Hack4Hope to show how
+          California policies, insurance decisions, and LA cost-of-living pressures
+          shape survivorship outcomes.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#simulator">Launch Simulator</a>
+          <a class="btn btn--ghost" href="#data">Explore Data Sources</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section" id="introduction">
+        <div class="section__header">
+          <h2>1. Introduction</h2>
+          <p>
+            This project provides a hyper-localized, interactive policy simulator
+            designed specifically for the Los Angeles healthcare landscape.
+          </p>
+        </div>
+        <div class="grid grid--two">
+          <article class="card">
+            <h3>1.1 Purpose</h3>
+            <p>
+              Demonstrate how California state policies (Medi-Cal, CFRA, Paid Family
+              Leave) and local barriers (housing costs, transit infrastructure)
+              dictate cancer survival rates in LA County.
+            </p>
+          </article>
+          <article class="card">
+            <h3>1.2 Scope</h3>
+            <ul>
+              <li>Journey: Symptom → Screening → Diagnosis → Treatment → Survivorship.</li>
+              <li>Policy layers: Medi-Cal vs. Private Insurance, PFL, CFRA.</li>
+              <li>Social determinants: Housing instability, transit barriers.</li>
+              <li>Advocacy bridges: Link failure points to current ACS CAN priorities.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="personas">
+        <div class="section__header">
+          <h2>2. Overall Description</h2>
+          <p>Choose a Los Angeles archetype to see how the system responds.</p>
+        </div>
+        <div class="grid grid--three" id="personaCards"></div>
+      </section>
+
+      <section class="section" id="simulator">
+        <div class="section__header">
+          <h2>3. System Features &amp; Functional Requirements</h2>
+          <p>
+            Simulate the impact of the “Zip Code Effect,” insurance friction, and
+            cost-of-living pressure through interactive controls.
+          </p>
+        </div>
+
+        <div class="simulator">
+          <div class="simulator__panel">
+            <h3>Simulation Controls</h3>
+            <label class="label">
+              Neighborhood Barrier Score
+              <input type="range" id="barrierScore" min="10" max="90" value="45" />
+              <span id="barrierValue" class="value">45</span>
+            </label>
+
+            <label class="label">
+              Insurance Tier
+              <select id="insuranceTier">
+                <option value="medi-cal">Medi-Cal</option>
+                <option value="employer">Employer PPO</option>
+                <option value="covered">Covered CA Silver</option>
+              </select>
+            </label>
+
+            <label class="label">
+              Monthly Rent Burden
+              <input type="range" id="rentBurden" min="800" max="2800" step="50" value="1650" />
+              <span id="rentValue" class="value">$1,650</span>
+            </label>
+
+            <label class="label">
+              Biomarker Testing Coverage
+              <input type="checkbox" id="biomarkerCoverage" />
+              <span class="hint">Toggle if insurance covers testing.</span>
+            </label>
+
+            <button class="btn btn--primary" id="advanceStage">Advance Stage</button>
+            <button class="btn btn--ghost" id="resetSim">Reset Simulation</button>
+          </div>
+
+          <div class="simulator__panel">
+            <h3>Patient Journey</h3>
+            <div class="journey">
+              <div class="journey__step" id="journeyStage">Symptom</div>
+              <div class="journey__status" id="journeyStatus">Awaiting screening access.</div>
+            </div>
+            <div class="metrics">
+              <div class="metric">
+                <span class="metric__label">Financial Health</span>
+                <span class="metric__value" id="financialHealth">$7,500</span>
+              </div>
+              <div class="metric">
+                <span class="metric__label">Wait Time</span>
+                <span class="metric__value" id="waitTime">3 weeks</span>
+              </div>
+              <div class="metric">
+                <span class="metric__label">Housing Stability</span>
+                <span class="metric__value" id="housingStatus">Stable</span>
+              </div>
+            </div>
+            <div class="alert" id="alertBox" aria-live="polite"></div>
+          </div>
+
+          <div class="simulator__panel">
+            <h3>Policy Action Mode</h3>
+            <p>
+              When the simulation reaches a critical point, apply a legislative fix
+              to see how outcomes improve.
+            </p>
+            <div class="policy-actions">
+              <button class="btn btn--secondary" data-policy="biomarker">
+                Pass SB-321: Biomarker Coverage
+              </button>
+              <button class="btn btn--secondary" data-policy="transport">
+                Expand Medi-Cal Transport Reimbursement
+              </button>
+              <button class="btn btn--secondary" data-policy="housing">
+                LA Rent Stabilization Voucher
+              </button>
+            </div>
+            <div class="policy-impact" id="policyImpact">
+              Select a policy to rewrite the outcome.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="requirements">
+        <div class="section__header">
+          <h2>4. Non-Functional Requirements</h2>
+        </div>
+        <div class="grid grid--two">
+          <article class="card">
+            <h3>Educational Accuracy</h3>
+            <p>
+              California-specific programs are clearly labeled (e.g., SDI, Paid Family
+              Leave) to distinguish them from federal programs.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Accessibility</h3>
+            <p>
+              Mobile-first responsive layout, high contrast modes, and Spanish toggle
+              placeholder for future localization.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="data">
+        <div class="section__header">
+          <h2>5. Data Sources</h2>
+          <p>Sources powering the simulation logic.</p>
+        </div>
+        <ul class="list">
+          <li>ACS CAN California Legislative Priorities (biomarker testing, copay accumulators).</li>
+          <li>California Health Care Foundation (Medi-Cal access and wait times).</li>
+          <li>LA County Department of Public Health (cancer clusters by SPA).</li>
+          <li>HUD Fair Market Rents for Los Angeles-Long Beach-Glendale.</li>
+        </ul>
+      </section>
+
+      <section class="section" id="impact">
+        <div class="section__header">
+          <h2>6. Social Impact Metrics</h2>
+          <p>Measure how users engage with policy advocacy and empathy building.</p>
+        </div>
+        <div class="grid grid--three">
+          <article class="card">
+            <h3>Advocacy Conversion</h3>
+            <p>Track how often users click “Learn about this bill” after a run.</p>
+          </article>
+          <article class="card">
+            <h3>Empathy Generation</h3>
+            <p>Visualize hidden costs of cancer in an expensive metro like LA.</p>
+          </article>
+          <article class="card">
+            <h3>Policy Literacy</h3>
+            <p>Teach the difference between “Having Insurance” and “Affording Care.”</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Built for Hack4Hope • LA Edition • 2025</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
